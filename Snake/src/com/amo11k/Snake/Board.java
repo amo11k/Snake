@@ -58,7 +58,7 @@ public class Board extends JPanel {
 	}
 
 	public Board(Score score){
-		//SnakeMusic.music();
+		SnakeMusic.music();
 		come = false;
 		GOver = false;
 		snake = new Snake();
