@@ -29,6 +29,7 @@ public class Board extends JPanel {
 	private Random random;
 	public static Boolean come;
 	public static Boolean GOver;
+	int countTerror=0;
 
 	class MyKeyAdapter extends KeyAdapter {
 		@Override
@@ -153,11 +154,16 @@ public class Board extends JPanel {
 					if (food.isSpecial()) {
 						come = true;
 						food = new Food();
+						SnakeMusic.eatSound();
 						Game.scoreLabel.setText(Score.incrementSpecialScore());
 						Game.lenght.setText(Snake.incrementLenght());
+						countTerror++;
+						if (countTerror >=5 )
+							terror();
 					} else {
 						come = true;
 						food = new Food();
+						SnakeMusic.eatSound();
 						Game.scoreLabel.setText(Score.incrementScore());
 						Game.lenght.setText(Snake.incrementLenght());
 						deltaTime = deltaTime - 5;
@@ -195,6 +201,14 @@ public class Board extends JPanel {
 
 	protected void gameOver() {
 		timerBoard.stop();
+		SnakeMusic.gameOverSound();
 		JOptionPane.showMessageDialog(null, "Game Over");
+	}
+	
+	protected void terror(){
+		Terror ter = new Terror();
+		ter.setVisible(true);
+		ter.setLocationRelativeTo(null);
+		SnakeMusic.screamSound();
 	}
 }

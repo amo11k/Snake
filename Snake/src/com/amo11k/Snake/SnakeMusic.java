@@ -23,7 +23,7 @@ public class SnakeMusic {
 				Player player;
 				try {
 					fis = new FileInputStream(
-							"src/com/amo11k/Music/lavanda.mp3");
+							"src/com/amo11k/res/lavanda.mp3");
 					BufferedInputStream bis = new BufferedInputStream(fis);
 					player = new Player(bis);
 					player.play();
@@ -46,7 +46,53 @@ public class SnakeMusic {
 				Player player;
 				try {
 					fis = new FileInputStream(
-							"src/com/amo11k/Music/come.mp3");
+							"src/com/amo11k/res/come.mp3");
+					BufferedInputStream bis = new BufferedInputStream(fis);
+					player = new Player(bis);
+					player.play();
+				} catch (FileNotFoundException | JavaLayerException e) {
+					System.out.println("jodido");
+				}
+			}
+		};
+		hilo.start();
+
+	}
+	
+	public static void screamSound() {
+		file = new File(".");
+		ruta = file.getAbsolutePath();
+		Thread hilo = new Thread() {
+			@Override
+			public void run() {
+				FileInputStream fis;
+				Player player;
+				try {
+					fis = new FileInputStream(
+							"src/com/amo11k/res/scream.mp3");
+					BufferedInputStream bis = new BufferedInputStream(fis);
+					player = new Player(bis);
+					player.play();
+				} catch (FileNotFoundException | JavaLayerException e) {
+					System.out.println("jodido");
+				}
+			}
+		};
+		hilo.start();
+
+	}
+	
+	public static void gameOverSound() {
+		file = new File(".");
+		ruta = file.getAbsolutePath();
+		Thread hilo = new Thread() {
+			@Override
+			public void run() {
+				FileInputStream fis;
+				Player player;
+				try {
+					fis = new FileInputStream(
+							"src/com/amo11k/res/gameOver.mp3");
 					BufferedInputStream bis = new BufferedInputStream(fis);
 					player = new Player(bis);
 					player.play();
