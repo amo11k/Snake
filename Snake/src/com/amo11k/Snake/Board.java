@@ -202,7 +202,8 @@ public class Board extends JPanel {
 	protected void gameOver() {
 		timerBoard.stop();
 		SnakeMusic.gameOverSound();
-		JOptionPane.showMessageDialog(null, "Game Over");
+		JOptionPane.showMessageDialog(Game.frame, "Game Over");
+		System.exit(1);
 	}
 	
 	protected void terror(){
