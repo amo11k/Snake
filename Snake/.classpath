@@ -5,5 +5,8 @@
 	<classpathentry kind="lib" path="C:/Users/prueba/git/SnakeTutorial-master/Snake/Snake/lib1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/prueba/git/SnakeTutorial-master/Snake/Snake/lib2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/prueba/git/SnakeTutorial-master/Snake/Snake/lib3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/prueba/git/Snake/Snake/lib1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/prueba/git/Snake/Snake/lib2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/prueba/git/Snake/Snake/lib3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
