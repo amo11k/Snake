@@ -29,25 +29,48 @@ public class Board extends JPanel {
 	private Random random;
 	public static Boolean come;
 	public static Boolean GOver;
-	int countTerror=0;
+	int countTerror = 0;
+	int terrorTime;
+	Terror ter;
 
 	class MyKeyAdapter extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_LEFT:
-				currentDir = Direction.LEFT;
+				if ((Board.currentDir == Direction.RIGHT)
+						&& (snake.getArray().size() > 1)) {
+
+				} else {
+					currentDir = Direction.LEFT;
+				}
 				break;
 			case KeyEvent.VK_RIGHT:
-				currentDir = Direction.RIGHT;
+				if ((Board.currentDir == Direction.LEFT)
+						&& (snake.getArray().size() > 1)) {
+
+				} else {
+					currentDir = Direction.RIGHT;
+				}
 				break;
 			case KeyEvent.VK_UP:
-				currentDir = Direction.UP;
+				if ((Board.currentDir == Direction.DOWN)
+						&& (snake.getArray().size() > 1)) {
+
+				} else {
+					currentDir = Direction.UP;
+				}
 				break;
 			case KeyEvent.VK_DOWN:
-				currentDir = Direction.DOWN;
+				if ((Board.currentDir == Direction.UP)
+						&& (snake.getArray().size() > 1)) {
+
+				} else {
+					currentDir = Direction.DOWN;
+				}
 				break;
-			case KeyEvent.VK_Q:
+			case KeyEvent.VK_SPACE:
+
 				break;
 			case KeyEvent.VK_E:
 				break;
@@ -58,7 +81,7 @@ public class Board extends JPanel {
 		}
 	}
 
-	public Board(Score score){
+	public Board(Score score) {
 		SnakeMusic.music();
 		come = false;
 		GOver = false;
@@ -140,13 +163,15 @@ public class Board extends JPanel {
 	public void init() {
 		keyAdapter = new MyKeyAdapter();
 		addKeyListener(keyAdapter);
+		terrorTime = (int) Math.random() * 10 + 1;
 		timerBoard = new Timer(deltaTime, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(GOver){
+				if (GOver) {
 					gameOver();
 				}
+
 				snake.move(currentDir);
 				if (snake.getArray().get(0).getNodeRow() == food.getFoodRow()
 						&& snake.getArray().get(0).getNodeCol() == food
@@ -158,7 +183,7 @@ public class Board extends JPanel {
 						Game.scoreLabel.setText(Score.incrementSpecialScore());
 						Game.lenght.setText(Snake.incrementLenght());
 						countTerror++;
-						if (countTerror >=5 )
+						if (countTerror == terrorTime)
 							terror();
 					} else {
 						come = true;
@@ -172,7 +197,7 @@ public class Board extends JPanel {
 				} else {
 					come = false;
 				}
-				Board.this.repaint();
+				repaint();
 
 			}
 
@@ -205,11 +230,18 @@ public class Board extends JPanel {
 		JOptionPane.showMessageDialog(Game.frame, "Game Over");
 		System.exit(1);
 	}
-	
-	protected void terror(){
+
+	protected void terror() {
+		resetCountTerror();
 		Terror ter = new Terror();
 		ter.setVisible(true);
 		ter.setLocationRelativeTo(null);
+		setFocusable(true);
 		SnakeMusic.screamSound();
+
+	}
+
+	private void resetCountTerror() {
+		countTerror = 0;
 	}
 }

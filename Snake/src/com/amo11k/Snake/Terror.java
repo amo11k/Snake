@@ -8,12 +8,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
 import java.awt.SystemColor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.SwingConstants;
 
 public class Terror extends JFrame {
 
 	private JPanel contentPane;
+	
 
 	/**
 	 * Launch the application.
@@ -22,7 +27,7 @@ public class Terror extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Terror frame = new Terror();
+					 Terror frame = new Terror();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +40,7 @@ public class Terror extends JFrame {
 	 * Create the frame.
 	 */
 	public Terror() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.menuText);
@@ -49,5 +54,19 @@ public class Terror extends JFrame {
 		exor.setIcon(new ImageIcon(Terror.class.getResource("/com/amo11k/res/exorcista.gif")));
 		contentPane.add(exor, BorderLayout.CENTER);
 	}
+	
+	/*class MyKeyAdapter extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_ENTER:
+				frame.dispose();
+				break;
+			default:
+				break;
+			}
+			repaint();
+		}
+	}*/
 
 }

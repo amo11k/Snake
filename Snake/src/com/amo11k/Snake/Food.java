@@ -12,11 +12,11 @@ public class Food {
 	private int random;
 
 	public Food() {
-		this.col = (int) (Math.random() * Board.COLS);
-		this.row = (int) (Math.random() * Board.ROWS);
+		this.col = (int) (Math.random() * Board.COLS-1);
+		this.row = (int) (Math.random() * Board.ROWS-1);
 
 		random = (int) (Math.random() * 10);
-		if ((random == 1) || (random == 0)) {
+		if ((random == 1) || (random == 0 || (random == 2))) {
 			special = true;
 		} else {
 			special = false;

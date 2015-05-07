@@ -31,7 +31,11 @@ public class Snake {
 		case UP:
 			row = getHeadRow();
 			col = getHeadCol();
-			if (snake.get(0).getNodeRow() <= 1) {
+
+			if (snakeColision(row - 1, col)) {
+				Board.GOver = true;
+			}
+			if (snake.get(0).getNodeRow() <= 0) {
 				Board.GOver = true;
 			}
 			snake.add(0, new Node(row - 1, col));
@@ -44,11 +48,15 @@ public class Snake {
 
 			break;
 		case DOWN:
-			if (snake.get(0).getNodeRow() >= 50) {
-				Board.GOver = true;
-			}
 			row = getHeadRow();
 			col = getHeadCol();
+			if (snakeColision(row + 1, col)) {
+				Board.GOver=true;
+			}
+			if (snake.get(0).getNodeRow() >= 52) {
+				Board.GOver = true;
+			}
+
 			snake.add(0, new Node(row + 1, col));
 			if (Board.come) {
 
@@ -58,11 +66,15 @@ public class Snake {
 			}
 			break;
 		case RIGHT:
-			if (snake.get(0).getNodeCol() >= 50) {
-				Board.GOver = true;
-			}
 			row = getHeadRow();
 			col = getHeadCol();
+			if (snakeColision(row,col+1)) {
+				Board.GOver=true;
+			}
+			if (snake.get(0).getNodeCol() >= 51) {
+				Board.GOver = true;
+			}
+			
 			snake.add(0, new Node(row, col + 1));
 			if (Board.come) {
 
@@ -72,11 +84,15 @@ public class Snake {
 			}
 			break;
 		case LEFT:
-			if (snake.get(0).getNodeCol() <= 1) {
-				Board.GOver = true;
-			}
 			row = getHeadRow();
 			col = getHeadCol();
+			if (snakeColision(row,col-1)) {
+				Board.GOver=true;
+			}
+			if (snake.get(0).getNodeCol() <= 0) {
+				Board.GOver = true;
+			}
+			
 			snake.add(0, new Node(row, col - 1));
 			if (Board.come) {
 
@@ -113,7 +129,14 @@ public class Snake {
 		return s;
 	}
 
-	/*
-	 * public void grow(){ snake.add(snake.size()-1, new Node); }
-	 */
+	public boolean snakeColision(int row, int col) {
+		Boolean choque=false;
+		for (int i = 0; i < snake.size() - 1; i++) {
+			if (row == snake.get(i).getNodeRow()
+					&& (col == snake.get(i).getNodeCol())) {
+				choque=true;
+			}
+		}
+		return choque;
+	}
 }
