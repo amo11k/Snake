@@ -35,5 +35,28 @@ public class SnakeMusic {
 		hilo.start();
 
 	}
+	
+	public static void eatSound() {
+		file = new File(".");
+		ruta = file.getAbsolutePath();
+		Thread hilo = new Thread() {
+			@Override
+			public void run() {
+				FileInputStream fis;
+				Player player;
+				try {
+					fis = new FileInputStream(
+							"src/com/amo11k/Music/come.mp3");
+					BufferedInputStream bis = new BufferedInputStream(fis);
+					player = new Player(bis);
+					player.play();
+				} catch (FileNotFoundException | JavaLayerException e) {
+					System.out.println("jodido");
+				}
+			}
+		};
+		hilo.start();
+
+	}
 
 }
