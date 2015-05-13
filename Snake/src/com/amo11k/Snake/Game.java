@@ -45,11 +45,13 @@ public class Game extends JFrame {
 	 * @throws FileNotFoundException 
 	 */
 	public Game(){
+		setBackground(Color.LIGHT_GRAY);
 		setFont(new Font("Candara", Font.BOLD, 14));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Snake Terror Edition - by Amo11k");
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
+		contentPane.setForeground(Color.GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
@@ -82,7 +84,8 @@ public class Game extends JFrame {
 		Color fondo = new Color(172, 168, 168);
 		Color borde = new Color(9, 55, 109);
 		board = new Board(score);
-		board.setBackground(new Color(0, 0, 0));
+		board.setForeground(Color.BLACK);
+		board.setBackground(Color.DARK_GRAY);
 		contentPane.add(board, BorderLayout.CENTER);
 		contentPane.setBackground(new Color(169, 169, 169));
 

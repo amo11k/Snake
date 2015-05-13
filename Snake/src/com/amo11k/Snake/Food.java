@@ -21,6 +21,7 @@ public class Food {
 		} else {
 			special = false;
 		}
+		
 	}
 
 	public int getFoodRow() {

@@ -82,18 +82,7 @@ public class Board extends JPanel {
 	}
 
 	public Board(Score score) {
-		SnakeMusic.music();
-		come = false;
-		GOver = false;
-		snake = new Snake();
-		food = new Food();
-		currentDir = Direction.RIGHT;
-		setFocusable(true);
-		score = new Score();
-		init();
-		// drawFood(g,food);
-		initFood();
-		timerBoard.start();
+		play();
 
 	}
 
@@ -155,7 +144,6 @@ public class Board extends JPanel {
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.YELLOW);
 		drawSnake(g);
 		drawFood(g, food);
 	}
@@ -178,16 +166,17 @@ public class Board extends JPanel {
 								.getFoodCol()) {
 					if (food.isSpecial()) {
 						come = true;
-						food = new Food();
+						initFood();
 						SnakeMusic.eatSound();
 						Game.scoreLabel.setText(Score.incrementSpecialScore());
 						Game.lenght.setText(Snake.incrementLenght());
 						countTerror++;
-						if (countTerror == terrorTime)
-							terror();
+						/*
+						 * if (countTerror == terrorTime) terror();
+						 */
 					} else {
 						come = true;
-						food = new Food();
+						initFood();
 						SnakeMusic.eatSound();
 						Game.scoreLabel.setText(Score.incrementScore());
 						Game.lenght.setText(Snake.incrementLenght());
@@ -206,14 +195,23 @@ public class Board extends JPanel {
 	}
 
 	public void initFood() {
-		foodTimer = new Timer(100, new ActionListener() {
+		if (foodTimer!=null){
+			foodTimer.stop();
+		}
+		food = new Food();
+		if (food.isSpecial()){
+			foodTimer = new Timer(8000, new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				drawFood(g, food);
-				Board.this.repaint();
-			}
-		});
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					foodTimer.stop();
+					initFood();
+					
+				}
+			});
+			foodTimer.start();
+		}
+		
 	}
 
 	private int squareHeight() {
@@ -227,8 +225,23 @@ public class Board extends JPanel {
 	protected void gameOver() {
 		timerBoard.stop();
 		SnakeMusic.gameOverSound();
-		JOptionPane.showMessageDialog(Game.frame, "Game Over");
-		System.exit(1);
+		Object[] options={"Yes, I wanna replay it","No, please, stop that shit"};
+		int response = JOptionPane.showOptionDialog(Game.frame, "Game Over"
+				+ "\nPuntucación " + Score.score + "\n" + "Length "
+				+ Snake.lenght + "\n\n" + "Volver a jugar?","Game Over",
+			    JOptionPane.YES_NO_CANCEL_OPTION,
+			    JOptionPane.QUESTION_MESSAGE,
+			    null,
+			    options,
+			    options[1]);
+		switch (response) {
+		case 0:
+			play();
+			break;
+		case 1:
+			System.exit(1);
+			break;
+		}
 	}
 
 	protected void terror() {
@@ -243,5 +256,19 @@ public class Board extends JPanel {
 
 	private void resetCountTerror() {
 		countTerror = 0;
+	}
+
+	private void play() {
+		SnakeMusic.music();
+		come = false;
+		GOver = false;
+		snake = new Snake();
+		currentDir = Direction.RIGHT;
+		setFocusable(true);
+		score = new Score();
+		init();
+		// drawFood(g,food);
+		initFood();
+		timerBoard.start();
 	}
 }
