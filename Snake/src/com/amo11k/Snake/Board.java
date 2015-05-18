@@ -31,7 +31,7 @@ public class Board extends JPanel {
 	public static Boolean GOver;
 	int countTerror = 0;
 	int terrorTime;
-	Terror ter;
+	private Terror terror;
 
 	class MyKeyAdapter extends KeyAdapter {
 		@Override
@@ -70,7 +70,7 @@ public class Board extends JPanel {
 				}
 				break;
 			case KeyEvent.VK_SPACE:
-
+					terror.setVisible(false);
 				break;
 			case KeyEvent.VK_E:
 				break;
@@ -171,9 +171,11 @@ public class Board extends JPanel {
 						Game.scoreLabel.setText(Score.incrementSpecialScore());
 						Game.lenght.setText(Snake.incrementLenght());
 						countTerror++;
-						/*
-						 * if (countTerror == terrorTime) terror();
-						 */
+						
+						  if (countTerror == 1){
+							  terror();
+						  }
+						 
 					} else {
 						come = true;
 						initFood();
@@ -200,7 +202,7 @@ public class Board extends JPanel {
 		}
 		food = new Food();
 		if (food.isSpecial()){
-			foodTimer = new Timer(8000, new ActionListener() {
+			foodTimer = new Timer(6500, new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -245,17 +247,11 @@ public class Board extends JPanel {
 	}
 
 	protected void terror() {
-		resetCountTerror();
-		Terror ter = new Terror();
-		ter.setVisible(true);
-		ter.setLocationRelativeTo(null);
-		setFocusable(true);
+		terror=new Terror();
+		terror.setVisible(true);
+		add(terror);
+		terror.setFocusable(true);
 		SnakeMusic.screamSound();
-
-	}
-
-	private void resetCountTerror() {
-		countTerror = 0;
 	}
 
 	private void play() {
@@ -269,6 +265,7 @@ public class Board extends JPanel {
 		init();
 		// drawFood(g,food);
 		initFood();
+		terror();
 		timerBoard.start();
 	}
 }

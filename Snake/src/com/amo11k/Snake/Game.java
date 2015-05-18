@@ -23,7 +23,6 @@ public class Game extends JFrame {
 	static JLabel scoreLabel;
 	private JLabel lblLenght;
 	protected static JLabel lenght;
-	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -51,7 +50,7 @@ public class Game extends JFrame {
 		setTitle("Snake Terror Edition - by Amo11k");
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
-		contentPane.setForeground(Color.GRAY);
+		contentPane.setForeground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
@@ -87,7 +86,7 @@ public class Game extends JFrame {
 		board.setForeground(Color.BLACK);
 		board.setBackground(Color.DARK_GRAY);
 		contentPane.add(board, BorderLayout.CENTER);
-		contentPane.setBackground(new Color(169, 169, 169));
+		contentPane.setBackground(new Color(65, 105, 225));
 
 		// contentPane.addKeyListener(this);
 	}
